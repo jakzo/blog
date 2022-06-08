@@ -1,0 +1,290 @@
+// Based on https://draculatheme.com
+
+// TODO: https://css-tricks.com/how-to-load-fonts-in-a-way-that-fights-fout-and-makes-lighthouse-happy/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&family=Source+Sans+Pro:wght@400;700&display=swap");
+
+:root {
+  --bg: #282a36;
+  --bg1: #3b3e50;
+  --bg3: #6272a4;
+
+  --content-width: 650px;
+  --content-width-extended: 800px;
+}
+
+body {
+  font: 16px/1.5 "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  color: #f8f8f2;
+  font-weight: normal;
+  background-color: var(--bg);
+}
+
+*::selection {
+  background-color: #6272a4;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(var(--bg), var(--bg1));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Noto Serif", "Inconsolata", "Times New Roman", Times, serif;
+  color: #8de9fe;
+  margin-bottom: 10px;
+  font-weight: normal;
+
+  a {
+    display: inline-block;
+    width: 40px;
+    margin-left: -40px;
+    user-select: none;
+
+    &::before {
+      content: "🔗";
+      margin-left: 40px;
+      opacity: 0;
+      transition: margin 0.2s ease, opacity 0.2s ease;
+    }
+  }
+
+  &:hover a::before {
+    margin-left: 0px;
+    opacity: 1;
+  }
+}
+
+article > ul,
+p,
+ol,
+table,
+pre,
+dl {
+  margin-bottom: 20px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+}
+
+h1 {
+  color: #50fa7b;
+  font-size: 48px;
+  line-height: 52px;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 36px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+h4,
+h5,
+h6 {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #f1fa8c;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+h5,
+h6 {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+h6 {
+  font-weight: 400;
+}
+
+a,
+a code {
+  color: #50fa7b;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+a:hover,
+a code:hover {
+  color: #06de3d;
+}
+
+a small {
+  font-size: 11px;
+  color: #6272a4;
+  margin-top: -0.6em;
+  display: block;
+}
+
+ul {
+  list-style: none;
+
+  li::before {
+    content: "»";
+    display: inline-block;
+    width: 16px;
+    margin-left: -16px;
+    font-size: 20px;
+    line-height: 1px;
+  }
+}
+
+strong {
+  font-weight: 600;
+}
+
+article {
+  max-width: var(--content-width-extended);
+  margin: 0 auto;
+  position: relative;
+}
+article > * {
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+article > pre {
+  max-width: inherit;
+}
+
+section img {
+  max-width: 100%;
+}
+
+blockquote {
+  border-left: 3px solid #50fa7b;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1px 0 1px 20px;
+  font-style: italic;
+  background: linear-gradient(90deg, #121318, transparent);
+}
+
+code {
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal,
+    monospace;
+  color: #f8f8f2;
+  background: #44475a;
+  font-size: 13px;
+  margin: 0 2px;
+  padding: 4px 4px;
+  border-radius: 3px;
+}
+
+pre {
+  padding: 8px 15px;
+  background: #0c0d11;
+  overflow: auto;
+  overflow-y: hidden;
+  cursor: text;
+}
+
+pre code {
+  color: #f8f8f2;
+  background: #0c0d11;
+  margin: 0;
+  padding: 0;
+}
+
+.iframe-container,
+img,
+video,
+pre {
+  border: 3px solid #ff79c6;
+  border-radius: 3px;
+}
+
+.iframe-container {
+  max-width: var(--content-width-extended);
+}
+iframe {
+  display: block;
+  width: 100%;
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: var(--content-width);
+}
+
+video {
+  display: block;
+  width: 100%;
+  max-width: var(--content-width);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  background: #6272a4;
+  color: #f8f8f2;
+  font-weight: 600;
+}
+
+td {
+  text-align: left;
+  padding: 5px 10px;
+  border-bottom: 2px solid #bd93f9;
+}
+
+hr {
+  border: 0;
+  outline: none;
+  height: 3px;
+  margin-bottom: 20px;
+  background: #50fa7b;
+}
+
+dt {
+  color: #f1fa8c;
+  font-weight: 600;
+}
+
+button,
+a.button {
+  color: var(--bg);
+  border: 2px solid #8be9fd;
+  background: #8be9fd;
+  padding: 10px 12px;
+  margin-top: 6px;
+  line-height: 14px;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+button:hover,
+a.button:hover {
+  background: #6272a4;
+  color: #f8f8f2;
+  border-color: #6272a4;
+}

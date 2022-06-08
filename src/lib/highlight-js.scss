@@ -1,0 +1,48 @@
+// Possible classes: https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+// Original styles: https://github.com/dracula/gh-pages/blob/master/_sass/rouge-dracula.scss
+// Original style meanings: https://github.com/richleland/pygments-css/blob/master/default.css
+
+.hljs {
+  color: #f8f8f2;
+
+  table td {
+    padding: 5px;
+  }
+  table pre {
+    margin: 0;
+  }
+
+  .hljs-comment {
+    color: #6272a4;
+    &::selection {
+      color: var(--bg);
+    }
+  }
+  .hljs-keyword {
+    color: #bd93f9;
+  }
+  .hljs-variable.constant_,
+  .hljs-type,
+  .hljs-built_in {
+    color: #ffb86c;
+  }
+  .hljs-subst,
+  .hljs-char.escape_ {
+    color: #ff5555;
+  }
+  .hljs-title,
+  .hljs-meta {
+    color: #50fa7b;
+  }
+  .hljs-regexp,
+  .hljs-property,
+  .hljs-tag {
+    color: #8be9fd;
+  }
+  .hljs-number,
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-attr {
+    color: #f1fa8c;
+  }
+}
