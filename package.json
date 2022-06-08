@@ -1,8 +1,8 @@
 {
   "name": "@jakzo/blog",
   "private": true,
-  "license": "NOLICENSE",
-  "version": "0.0.1",
+  "license": "MIT",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -13,7 +13,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check --plugin-search-dir=. . && eslint .",
-    "format": "prettier --write --plugin-search-dir=. ."
+    "format": "prettier --write --plugin-search-dir=. .",
+    "test": "yarn lint && yarn check"
   },
   "dependencies": {
     "hast-util-has-property": "^2.0.0",

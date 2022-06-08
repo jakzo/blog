@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+
+env:
+  node_version: 16
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    outputs:
+      release_required: ${{ steps.release_required.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.node_version }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./build
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.ref == 'refs/heads/main' }}
+    environment: Release
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+      - run: git config --global user.name "github-actions[bot]" &&
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
