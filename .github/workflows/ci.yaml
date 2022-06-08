@@ -37,10 +37,10 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     environment: Release
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
           name: build
+      - run: pwd && ls -lR
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,4 +48,3 @@ jobs:
           keep_files: true
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
-          cname: jf.id.au
