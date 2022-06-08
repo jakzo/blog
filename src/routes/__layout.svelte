@@ -9,6 +9,5 @@
 </svelte:head>
 
 <GoogleAnalytics />
-
 <Nav />
 <slot />
