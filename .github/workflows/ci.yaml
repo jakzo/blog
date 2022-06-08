@@ -40,11 +40,10 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: build
-      - run: pwd && ls -lR
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./
           keep_files: true
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
