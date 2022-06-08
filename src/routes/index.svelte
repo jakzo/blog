@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-  <title>Home</title>
+  <title>jakzo's blog</title>
 </svelte:head>
 
 <main>
