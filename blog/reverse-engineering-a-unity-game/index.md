@@ -301,27 +301,27 @@ loc_1804EC38A:                          ; CODE XREF: sub_1804EB1A0+118C↑j
                 divss   xmm1, xmm6
                 addss   xmm0, xmm1
                 movss   dword ptr [rdi+108h], xmm0
-                call    Random_1_get_value        ; === Random patrol area X?
-                movss   xmm6, dword ptr [rdi+68h]
+                call    Random_1_get_value        ; xmm0 = randX = Random.value()
+                movss   xmm6, dword ptr [rdi+68h] ; xmm6 = patrolXz.x
                 xor     ecx, ecx
-                movaps  xmm7, xmm0
-                call    Random_1_get_value        ; === Random patrol area Z?
-                movss   xmm1, dword ptr [rdi+6Ch]
+                movaps  xmm7, xmm0                ; xmm7 = randX
+                call    Random_1_get_value        ; xmm0 = randZ = Random.value()
+                movss   xmm1, dword ptr [rdi+6Ch] ; xmm1 = patrolXz.z
                 lea     rcx, [rbp+57h+var_D0]
-                movaps  xmm3, xmm1
-                mulss   xmm7, xmm6
+                movaps  xmm3, xmm1                ; xmm3 = patrolXz.z
+                mulss   xmm7, xmm6                ; xmm7 = randX * patrolXz.x
                 xor     eax, eax
                 mov     [rsp+110h+var_F0], r14
-                mulss   xmm3, xmm0
-                xorps   xmm2, xmm2
+                mulss   xmm3, xmm0                ; xmm3 = patrolXz.z * randZ
+                xorps   xmm2, xmm2                ; xmm2 = 0
                 mov     [rbp+57h+var_D0], rax
-                addss   xmm7, xmm7
+                addss   xmm7, xmm7                ; xmm7 = (randX * patrolXz.x) * 2
                 mov     [rbp+57h+var_C8], eax
-                addss   xmm3, xmm3
-                subss   xmm7, xmm6
-                subss   xmm3, xmm1
-                movaps  xmm1, xmm7
-                call    Coord_1_ToVector3
+                addss   xmm3, xmm3                ; xmm3 = (patrolXz.z * randZ) * 2
+                subss   xmm7, xmm6                ; xmm7 = (randX * patrolXz.x) * 2 - patrolXz.x
+                subss   xmm3, xmm1                ; xmm3 = (patrolXz.z * randZ) * 2 - patrolXz.z
+                movaps  xmm1, xmm7                ; xmm1 = (randX * patrolXz.x) * 2 - patrolXz.x
+                call    Coord_1_ToVector3         ; randCoord = new Vector3(xmm1, xmm2, xmm3)
                 mov     rcx, cs:qword_181EA6150
                 test    byte ptr [rcx+127h], 2
                 jz      short loc_1804EC446
@@ -340,7 +340,7 @@ loc_1804EC446:                          ; CODE XREF: sub_1804EB1A0+1296↑j
                 mov     [rsp+110h+var_D8], eax
                 movsd   [rbp+57h+var_C0], xmm8
                 mov     [rbp+57h+var_B8], ebx
-                call    Vector3_op_Addition
+                call    Vector3_op_Addition       ; finalPatrolPoint = randCoord + _homePosition
                 mov     rcx, [rdi+18h]
                 test    rcx, rcx
                 jz      short loc_1804EC4B2
@@ -350,8 +350,18 @@ loc_1804EC446:                          ; CODE XREF: sub_1804EB1A0+1296↑j
                 xor     r8d, r8d
                 movsd   [rsp+110h+var_E0], xmm0
                 mov     [rsp+110h+var_D8], eax
-                call    BehaviourBaseNav_SetPath ; === Send boss claw to point
+                call    BehaviourBaseNav_SetPath  ; Send boss claw to finalPatrolPoint
                 jmp     loc_1804EBB03
+```
+
+This is the code that maps to what I think the assembly above is doing:
+
+```cs
+float x = (bossClawAi.patrolXz.x * Random.value) * 2 - bossClawAi.patrolXz.x;
+float z = (bossClawAi.patrolXz.z * Random.value) * 2 - bossClawAi.patrolXz.z;
+Vector3 randCoord = new Vector3(x, 0, z);
+Vector3 finalPatrolPoint = randCoord + bossClawAi._homePosition;
+bossClawAi._navAgent.SetDestination(finalPatrolPoint);
 ```
 
 What I found was what I was expecting (a call to get a random value followed by `NavMeshAgent.SetDestination()`) but not what I was hoping for 😞 (some logic which could be manipulated to force it to go in a certain direction). Although it's important to note that I'm not 100% certain on this. Assembly is complicated. I haven't worked out the purpose of every single instruction and there are so many other code paths in the function. There may be some trick to trigger one of the other `NavMeshAgent.SetDestination()` calls to send it in the desired direction. 🤷
