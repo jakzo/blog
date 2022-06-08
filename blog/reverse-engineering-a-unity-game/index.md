@@ -281,7 +281,7 @@ private void AiTick()
 
 My backup plan was to read the assembly directly, so I loaded the game's assembly (`GameAssembly.dll`) into IDA. In addition to just converting the machine code, IDA analyses and works out the boundaries of all the subroutines and displays the disassembled code in a nice graph format. I ran Il2CppInspector on the game to find the address of `BossClawAi.AiTick()` and opened the subroutine graph at that address, since the logic for deciding where to go is probably in here. I knew that there should be a call to `NavMeshAgent.SetDestination()` just after it figures out the point it wants to patrol to so I searched for calls to its address in this subroutine and found a few of them. For each of these calls I worked backwards through the code, renaming any `call` instructions as I came across them to change the opaque memory address into a function name by cross-referencing the address with Il2CppInspector's output. Eventually I found what I think is the call that sends the boss claw to patrol.
 
-The segment of assembly from IDA that sends the boss claw to a random point:
+The segment of assembly from IDA that sends the boss claw to a random point (with comments added by me):
 
 ```x86asm
 loc_1804EC38A:                          ; CODE XREF: sub_1804EB1A0+118C↑j
