@@ -29,7 +29,11 @@ export const rehypeHeadingSlugs: Plugin<void[], Root> = () => (tree) => {
     node.children.unshift({
       type: "element",
       tagName: "a",
-      properties: { href: `#${slug}` },
+      properties: {
+        href: `#${slug}`,
+        "aria-role": "img",
+        "aria-label": "Link to heading",
+      },
       children: [],
     });
   });
