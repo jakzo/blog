@@ -31,7 +31,7 @@ export const rehypeHeadingSlugs: Plugin<void[], Root> = () => (tree) => {
       tagName: "a",
       properties: {
         href: `#${slug}`,
-        "aria-role": "img",
+        role: "img",
         "aria-label": "Link to heading",
       },
       children: [],
