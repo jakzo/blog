@@ -2,8 +2,6 @@
   import "$lib/highlight-js.scss";
   import type { Post } from "$lib/types";
   import { getFullTitle } from "$lib/util/posts";
-
-  export const hydrate = false;
 </script>
 
 <script type="ts">

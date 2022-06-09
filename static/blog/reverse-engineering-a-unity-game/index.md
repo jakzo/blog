@@ -15,7 +15,7 @@ I've always wondered how people mod games -- figuring out all the APIs, what the
 
 ## ⚙️ Technical background
 
-This section will be pretty dense so I'll include a **tl;dr** for each section in a quote block at the beginning.
+This section will be pretty dense so I'll include a **tl;dr** in a quote block under each heading.
 
 ### 🏗️ How the game is compiled
 
@@ -23,7 +23,7 @@ This section will be pretty dense so I'll include a **tl;dr** for each section i
 
 Boneworks is a [Unity](https://unity.com/) game, and as such the code is written in [C#](<https://en.wikipedia.org/wiki/C_Sharp_(programming_language)>). A lot of languages (eg. [C++](https://en.wikipedia.org/wiki/C%2B%2B)) compile into instructions for a particular CPU architecture (eg. [x86](https://en.wikipedia.org/wiki/X86) which is most popular for PCs today), but C# compiles to an intermediate language (IL) which no CPU understands. Instead an execution engine (eg. [Mono](<https://en.wikipedia.org/wiki/Mono_(software)>)) interprets, compiles and runs the IL when the program is run. However this [just-in-time compiling](https://en.wikipedia.org/wiki/Just-in-time_compilation) of the code adds overhead and for games, faster is better. This is why Unity built a tool called [IL2CPP](https://docs.unity3d.com/Manual/IL2CPP.html).
 
-IL2CPP transforms the IL into C++ code (as the name suggests). This C++ code can then be compiled to a particular CPU architecture, eliminating the overhead of an execution engine. One thing that is important to note though: usually in C++ the names of your variables and structures don't matter because they are all compiled down to memory addresses, but C# supports (and heavily uses) [reflection](https://en.wikipedia.org/wiki/Reflective_programming) which allows code to introspect things like method names and types. IL2CPP outputs a file with all these symbols that the C++ code can use so that reflection features work. The compiled output (whether IL or IL2CPP binary) is a `.dll` file that is known in C# terminology as an _assembly_ (which is confusing because it is referring to a file containing machine code, while in computer science terminology the word assembly generally refers to human-readable text format representing some machine code, and I'll be using this other definition further below when we get into disassembly).
+IL2CPP transforms the IL into C++ code (as the name suggests). This C++ code can then be compiled to a particular CPU architecture, eliminating the overhead of an execution engine. One thing that is important to note though: usually in C++ the names of your variables and structures don't matter because they are all compiled down to memory addresses, but C# supports (and heavily uses) [reflection](https://en.wikipedia.org/wiki/Reflective_programming) which allows code to introspect things like method names and types. IL2CPP outputs a file with all these symbols that the C++ code can use so that reflection features work. The compiled output (whether IL or IL2CPP binary) is a `.dll` file that is known in C# terminology as an _assembly_ (which is confusing because it is referring to a file containing machine code, while in computer science terminology the word assembly generally refers to a human-readable text format representing some machine code, and I'll be using this other definition further below when we get into disassembly).
 
 So now that we have some background on how the game is compiled and which data is available, we can get to the actual process of reverse engineering!
 

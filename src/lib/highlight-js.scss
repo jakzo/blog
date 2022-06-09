@@ -13,9 +13,9 @@
   }
 
   .hljs-comment {
-    color: #6272a4;
+    color: var(--bg500);
     &::selection {
-      color: var(--bg);
+      color: var(--bg200);
     }
   }
   .hljs-keyword {

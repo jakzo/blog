@@ -4,9 +4,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&family=Source+Sans+Pro:wght@400;700&display=swap");
 
 :root {
-  --bg: #282a36;
-  --bg1: #3b3e50;
-  --bg3: #6272a4;
+  --bg0: #000000;
+  --bg200: #282a36;
+  --bg300: #3b3e50;
+  --bg500: #6373a5;
 
   --content-width: 650px;
   --content-width-extended: 800px;
@@ -17,11 +18,11 @@ body {
     sans-serif;
   color: #f8f8f2;
   font-weight: normal;
-  background-color: var(--bg);
+  background-color: var(--bg200);
 }
 
 *::selection {
-  background-color: #6272a4;
+  background-color: var(--bg500);
 }
 
 .background {
@@ -31,7 +32,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(var(--bg), var(--bg1));
+  background: linear-gradient(var(--bg200), var(--bg300));
 }
 
 h1,
@@ -133,7 +134,7 @@ a code:hover {
 
 a small {
   font-size: 11px;
-  color: #6272a4;
+  color: var(--bg500);
   margin-top: -0.6em;
   display: block;
 }
@@ -195,7 +196,7 @@ code {
 
 pre {
   padding: 8px 15px;
-  background: #0c0d11;
+  background: var(--bg0);
   overflow: auto;
   overflow-y: hidden;
   cursor: text;
@@ -203,7 +204,7 @@ pre {
 
 pre code {
   color: #f8f8f2;
-  background: #0c0d11;
+  background: var(--bg0);
   margin: 0;
   padding: 0;
 }
@@ -244,7 +245,7 @@ table {
 th {
   text-align: left;
   padding: 10px;
-  background: #6272a4;
+  background: var(--bg500);
   color: #f8f8f2;
   font-weight: 600;
 }
@@ -270,7 +271,7 @@ dt {
 
 button,
 a.button {
-  color: var(--bg);
+  color: var(--bg200);
   border: 2px solid #8be9fd;
   background: #8be9fd;
   padding: 10px 12px;
@@ -284,7 +285,7 @@ a.button {
 
 button:hover,
 a.button:hover {
-  background: #6272a4;
+  background: var(--bg500);
   color: #f8f8f2;
-  border-color: #6272a4;
+  border-color: var(--bg500);
 }
