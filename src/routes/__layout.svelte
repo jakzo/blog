@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <meta property="description" content={DESCRIPTION} />
+  <meta name="description" content={DESCRIPTION} />
   <meta property="og:site_name" content="jakzo's blog" />
   <meta property="og:description" content={DESCRIPTION} />
   <meta property="og:locale" content="en_GB" />
