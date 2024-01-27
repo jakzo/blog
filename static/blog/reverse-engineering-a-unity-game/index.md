@@ -5,6 +5,8 @@ date: 2022-06-05
 excerpt: How I found the boss claw patrol logic in Boneworks and built a mod to change it.
 ---
 
+> ⚠️ These days I have a better workflow. This post still has some useful information but if you to decompile a game for modding I recommend following the steps in my newer post here: [🧰 Modding Unity IL2CPP Games](https://jf.id.au/blog/modding-unity-il2cpp-games)
+
 I've always wondered how people mod games -- figuring out all the APIs, what they do and hooking into them to make something cool. I recently went through this process of understanding the exact logic used in a part of the game and building a mod to change it. During this I learnt how C# and Unity compile to machine code, how to read disassembled x86 code and the various tools to help with these tasks. But before I get to that, I'll explain what I'm modding and why.
 
 {% toc %}
