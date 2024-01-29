@@ -1,7 +1,8 @@
 <svelte:head>
   <script
     async
-    src="https://www.googletagmanager.com/gtag/js?id=G-ZN4866H1GN"></script>
+    src="https://www.googletagmanager.com/gtag/js?id=G-ZN4866H1GN"
+  ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() {
