@@ -251,6 +251,8 @@ If you're interested in the mod, here are the links to download and see the code
 
 ### 🔍 Decompiling the code
 
+> ⚠️ These days I have a better workflow. This post still has some useful information but if you to decompile a game for modding I recommend following the steps in my newer post here: [🧰 Modding Unity IL2CPP Games](https://jf.id.au/blog/modding-unity-il2cpp-games)
+
 I still wanted to know if the point it goes to was truly random though. To do this I used Cpp2IL to decompile the IL2CPP assembly back into IL using this command:
 
 ```powershell
