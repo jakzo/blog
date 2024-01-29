@@ -8,7 +8,8 @@
   import type { PageData } from "./$types";
 
   export let data: PageData;
-  const post = data.post!;
+  const post = data.post;
+  if (!post) throw new Error("post is undefined");
 
   let date = new Date(post.metadata.date).toLocaleDateString(undefined, {
     timeZone: "UTC",
@@ -35,6 +36,7 @@
 </div>
 
 <article>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html post.content}
 </article>
 

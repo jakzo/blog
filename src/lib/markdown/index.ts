@@ -8,7 +8,7 @@ import remark2rehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import frontmatter from "remark-frontmatter";
 import highlight from "rehype-highlight";
-import { defaultHandlers, type State } from "mdast-util-to-hast";
+import { defaultHandlers, type Handlers } from "mdast-util-to-hast";
 import yaml from "js-yaml";
 import x86asm from "highlight.js/lib/languages/x86asm";
 import powershell from "highlight.js/lib/languages/powershell";
@@ -33,12 +33,12 @@ const runner = unified()
   .use(remark2rehype, {
     allowDangerousHtml: true,
     handlers: {
-      root: (h: State, root: MdastRoot) => {
+      root: (h, root: MdastRoot) => {
         const result = defaultHandlers.root(h, root);
         if (result && !Array.isArray(result)) result.data = root.data;
         return result;
       },
-    } as any,
+    } as Handlers,
   })
   .use(highlight, { languages: { x86asm, powershell, svelte } })
   .use(rehypeUpdateHtmlUrls)
