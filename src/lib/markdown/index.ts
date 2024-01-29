@@ -8,7 +8,7 @@ import remark2rehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import frontmatter from "remark-frontmatter";
 import highlight from "rehype-highlight";
-import { defaultHandlers } from "mdast-util-to-hast";
+import { defaultHandlers, type State } from "mdast-util-to-hast";
 import yaml from "js-yaml";
 import x86asm from "highlight.js/lib/languages/x86asm";
 import powershell from "highlight.js/lib/languages/powershell";
@@ -19,6 +19,7 @@ import type { Post, PostMetadata } from "../types";
 import { rehypeHeadingSlugs, remarkTableOfContents } from "./headings";
 import { svelte } from "./hljs-svelte";
 import { rehypeUpdateHtmlUrls, remarkUpdateImageUrls } from "./media";
+import type { MdastRoot } from "mdast-util-to-hast/lib";
 
 const vfileRead = promisify(vfile.read) as unknown as (
   ...args: Parameters<typeof vfile.readSync>
@@ -32,12 +33,12 @@ const runner = unified()
   .use(remark2rehype, {
     allowDangerousHtml: true,
     handlers: {
-      root: (h, root) => {
+      root: (h: State, root: MdastRoot) => {
         const result = defaultHandlers.root(h, root);
         if (result && !Array.isArray(result)) result.data = root.data;
         return result;
       },
-    },
+    } as any,
   })
   .use(highlight, { languages: { x86asm, powershell, svelte } })
   .use(rehypeUpdateHtmlUrls)

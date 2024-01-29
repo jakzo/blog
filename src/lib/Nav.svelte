@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { base } from "$app/paths";
   import GithubCorner from "$lib/GithubCorner.svelte";
 </script>

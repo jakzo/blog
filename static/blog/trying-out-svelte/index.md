@@ -4,7 +4,7 @@ date: 2022-03-15
 excerpt: I built a Wordle clone using Svelte for the first time and loved it. These are my initial thoughts on the framework.
 ---
 
-> **tl;dr** I loved it enough to write a blog post about it. 😍 It's like vanilla HTML/CSS/JS but everything's easier to do and structured better. Read the "[what Svelte feels like to me](#what_svelte_feels_like_to_me)" section for a summary of everything I like about it.
+> **tl;dr** I loved it enough to write a blog post about it. 😍 It's like vanilla HTML/CSS/JS but everything's easier to do and structured better. Read the "[what Svelte feels like to me](#what-svelte-feels-like-to-me)" section for a summary of everything I like about it.
 
 I made a [Wordle clone](https://jakzo.github.io/eternal-wordle/) the other day ([code](https://github.com/jakzo/eternal-wordle)). First a simple one in React, then I decided to try making another game mode, but also try out [Svelte](https://svelte.dev/) at the same time to see what all the fuss was about. I had no idea this would happen before I started, but within the first hour of using it I became a huge fan. 🤩
 

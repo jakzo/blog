@@ -1,12 +1,9 @@
 import fs from "fs/promises";
 import { readPost } from "$lib/markdown";
-import type { Post } from "$lib/types";
 import { POSTS_PATH } from "$lib/util/path";
-import type { RequestHandler } from "./__types/index";
+import type { PageServerLoad } from "./$types";
 
-export const get: RequestHandler<{
-  posts: Pick<Post, "slug" | "metadata">[];
-}> = async () => {
+export const load: PageServerLoad = async () => {
   const postFolders = await fs.readdir(POSTS_PATH, { withFileTypes: true });
   const posts = await Promise.all(
     postFolders
@@ -20,5 +17,7 @@ export const get: RequestHandler<{
     (a, b) =>
       new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
   );
-  return { body: { posts } };
+  return { posts };
 };
+
+export const prerender = true;

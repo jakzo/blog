@@ -1,13 +1,15 @@
-<script type="ts" context="module">
+<script lang="ts" context="module">
   import "$lib/highlight-js.scss";
-  import type { Post } from "$lib/types";
   import { getFullTitle } from "$lib/util/posts";
 </script>
 
-<script type="ts">
+<script lang="ts">
   import CommentsBox from "$lib/CommentBox/index.svelte";
+  import type { PageData } from "./$types";
 
-  export let post: Post;
+  export let data: PageData;
+  const post = data.post!;
+
   let date = new Date(post.metadata.date).toLocaleDateString(undefined, {
     timeZone: "UTC",
     dateStyle: "long",

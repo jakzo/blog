@@ -1,11 +1,12 @@
-<script type="ts" context="module">
+<script lang="ts" context="module">
   import { base } from "$app/paths";
-  import type { Post } from "$lib/types";
   import { getFullTitle } from "$lib/util/posts";
 </script>
 
-<script type="ts">
-  export let posts: Post[];
+<script lang="ts">
+  import type { PageData } from "./$types";
+
+  export let data: PageData;
 </script>
 
 <svelte:head>
@@ -14,7 +15,7 @@
 
 <main>
   <h1>My Posts</h1>
-  {#each posts as post}
+  {#each data.posts as post}
     <a href="{base}/blog/{post.slug}" class="post">
       <p class="date">
         {new Date(post.metadata.date).toLocaleDateString(undefined, {
