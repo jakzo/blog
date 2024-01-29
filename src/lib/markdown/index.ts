@@ -12,6 +12,9 @@ import { defaultHandlers, type Handlers } from "mdast-util-to-hast";
 import yaml from "js-yaml";
 import x86asm from "highlight.js/lib/languages/x86asm";
 import powershell from "highlight.js/lib/languages/powershell";
+import type { MdastRoot } from "mdast-util-to-hast/lib";
+import rehypeRaw from "rehype-raw";
+import { visit } from "unist-util-visit";
 
 import { POSTS_PATH } from "$lib/util/path";
 
@@ -19,7 +22,6 @@ import type { Post, PostMetadata } from "../types";
 import { rehypeHeadingSlugs, remarkTableOfContents } from "./headings";
 import { svelte } from "./hljs-svelte";
 import { rehypeUpdateHtmlUrls, remarkUpdateImageUrls } from "./media";
-import type { MdastRoot } from "mdast-util-to-hast/lib";
 
 const vfileRead = promisify(vfile.read) as unknown as (
   ...args: Parameters<typeof vfile.readSync>
@@ -43,6 +45,15 @@ const runner = unified()
   .use(highlight, { languages: { x86asm, powershell, svelte } })
   .use(rehypeUpdateHtmlUrls)
   .use(rehypeHeadingSlugs)
+  .use(rehypeRaw)
+  .use(() => (tree) => {
+    visit(tree, "element", (node) => {
+      if (node.tagName === "a") {
+        node.properties = node.properties || {};
+        node.properties.onClick = "event.stopPropagation()";
+      }
+    });
+  })
   .use(rehypeStringify, { allowDangerousHtml: true });
 
 export const readPost = async (
